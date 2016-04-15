@@ -14,3 +14,6 @@ Use the "Issues" tab :)
 
 ##Pull request
 Pull request are always welcome. Note that the code should follow PSR standards.
+
+##License
+MIT, see LICENSE.md
