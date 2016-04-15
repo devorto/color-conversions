@@ -39,7 +39,7 @@ class CMYK
      * @param int|string $magenta %
      * @param int|string $yellow %
      * @param int|string $key % (Black)
-     * @return bool
+     * @return self
      */
     public function setCMYK($cyan, $magenta, $yellow, $key)
     {
@@ -47,6 +47,8 @@ class CMYK
         $this->setMagenta($magenta);
         $this->setYellow($yellow);
         $this->setKey($key);
+
+        return $this;
     }
 
     /**
@@ -70,6 +72,7 @@ class CMYK
      *
      * @param int|string $cyan
      * @throws ColorException
+     * @return self
      */
     public function setCyan($cyan)
     {
@@ -77,8 +80,9 @@ class CMYK
         if ($cyan < 0 || $cyan > 100) {
             throw new ColorException('cyan', $cyan, 0, 100);
         }
-
         $this->cyan = $cyan;
+
+        return $this;
     }
 
     /**
@@ -96,6 +100,7 @@ class CMYK
      *
      * @param int|string $magenta
      * @throws ColorException
+     * @return self
      */
     public function setMagenta($magenta)
     {
@@ -103,8 +108,9 @@ class CMYK
         if ($magenta < 0 || $magenta > 100) {
             throw new ColorException('magenta', $magenta, 0, 100);
         }
-
         $this->magenta = $magenta;
+
+        return $this;
     }
 
     /**
@@ -122,6 +128,7 @@ class CMYK
      *
      * @param $yellow
      * @throws ColorException
+     * @return self
      */
     public function setYellow($yellow)
     {
@@ -129,8 +136,9 @@ class CMYK
         if ($yellow < 0 || $yellow > 100) {
             throw new ColorException('yellow', $yellow, 0, 100);
         }
-
         $this->yellow = $yellow;
+
+        return $this;
     }
 
     /**
@@ -148,6 +156,7 @@ class CMYK
      *
      * @param int|string $key
      * @throws ColorException
+     * @return self
      */
     public function setKey($key)
     {
@@ -155,8 +164,9 @@ class CMYK
         if ($key < 0 || $key > 100) {
             throw new ColorException('key', $key, 0, 100);
         }
-
         $this->key = $key;
+
+        return $this;
     }
 
     /**
@@ -178,7 +188,7 @@ class CMYK
     public function fromHTML(HTML $html)
     {
         $this->fromRGB($html->toRGB());
-        
+
         return $this;
     }
 
@@ -191,7 +201,7 @@ class CMYK
     {
         $html = new HTML();
         $html->fromCMYK($this);
-        
+
         return $html;
     }
 
@@ -216,7 +226,7 @@ class CMYK
         $this->setMagenta(round($magenta * 100));
         $this->setYellow(round($yellow * 100));
         $this->setKey(round($key * 100));
-        
+
         return $this;
     }
 
@@ -229,7 +239,7 @@ class CMYK
     {
         $rgb = new RGB();
         $rgb->fromCMYK($this);
-        
+
         return $rgb;
     }
 }

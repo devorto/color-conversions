@@ -165,7 +165,7 @@ class RGB
         $this->setRed(round($red * 255));
         $this->setGreen(round($green * 255));
         $this->setBlue(round($blue * 255));
-        
+
         return $this;
     }
 
@@ -207,7 +207,7 @@ class RGB
     {
         $html = new HTML();
         $html->fromRGB($this);
-        
+
         return $html;
     }
 }

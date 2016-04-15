@@ -36,6 +36,7 @@ class HTML
      *
      * @param string $htmlColorCode Code or HTML name
      * @throws ColorException
+     * @return self
      */
     public function setHTML($htmlColorCode)
     {
@@ -57,8 +58,9 @@ class HTML
                 throw new ColorException('html', $htmlColorCode, '#ffffff', '#000000');
             }
         }
-
         $this->htmlColorCode = $htmlColorCode;
+
+        return $this;
     }
 
     /**
@@ -115,7 +117,7 @@ class HTML
 
         return $this;
     }
-    
+
     /**
      * Converts RGB color format to CMYK color format
      *
@@ -125,7 +127,7 @@ class HTML
     {
         $rgb = new RGB();
         $rgb->fromHTML($this);
-        
+
         return $rgb;
     }
 }
