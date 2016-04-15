@@ -11,13 +11,13 @@ namespace gdwebs\ColorFormats;
 class CMYK
 {
     /** @var int */
-    private $cyan;
+    protected $cyan;
     /** @var int */
-    private $magenta;
+    protected $magenta;
     /** @var int */
-    private $yellow;
+    protected $yellow;
     /** @var int */
-    private $key;
+    protected $key;
 
     /**
      * CMYK constructor.
@@ -58,10 +58,10 @@ class CMYK
     public function getCMYK($includePercentage = true)
     {
         return [
-            $this->cyan . ($includePercentage ? '%' : ''),
-            $this->magenta . ($includePercentage ? '%' : ''),
-            $this->yellow . ($includePercentage ? '%' : ''),
-            $this->key . ($includePercentage ? '%' : '')
+            'cyan' => $this->cyan . ($includePercentage ? '%' : ''),
+            'magenta' => $this->magenta . ($includePercentage ? '%' : ''),
+            'yellow' => $this->yellow . ($includePercentage ? '%' : ''),
+            'key' => $this->key . ($includePercentage ? '%' : '')
         ];
     }
 

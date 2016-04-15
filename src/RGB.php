@@ -11,11 +11,11 @@ namespace gdwebs\ColorFormats;
 class RGB
 {
     /** @var int */
-    private $red;
+    protected $red;
     /** @var int */
-    private $green;
+    protected $green;
     /** @var int */
-    private $blue;
+    protected $blue;
 
     /**
      * RGB constructor

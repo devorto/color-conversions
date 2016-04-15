@@ -86,6 +86,19 @@ class HTML
     }
 
     /**
+     * Converts HTML color format to CMYK color format
+     *
+     * @return CMYK
+     */
+    public function toCMYK()
+    {
+        $cmyk = new CMYK();
+        $cmyk->fromHTML($this);
+
+        return $cmyk;
+    }
+
+    /**
      * Converts RGB color format to HTML color format
      *
      * @param RGB $rgb
@@ -101,19 +114,6 @@ class HTML
         $this->setHTML(implode('', [$red, $green, $blue]));
 
         return $this;
-    }
-
-    /**
-     * Converts HTML color format to CMYK color format
-     *
-     * @return CMYK
-     */
-    public function toCMYK()
-    {
-        $cmyk = new CMYK();
-        $cmyk->fromHTML($this);
-        
-        return $cmyk;
     }
     
     /**
