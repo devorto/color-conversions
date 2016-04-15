@@ -1,0 +1,17 @@
+{
+  "name": "gdwebs/ColorFormats",
+  "description": "A PHP package to convert between color spaces",
+  "authors": [
+    {
+      "name": "Geoffrey Dijkstra",
+      "email": "info@gdwebs.nl",
+      "homepage": "http://www.gdwebs.nl",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "gdwebs\\": "src/"
+    }
+  }
+}
