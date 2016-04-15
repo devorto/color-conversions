@@ -18,7 +18,8 @@ class RGB
     private $blue;
 
     /**
-     * RGB constructor.
+     * RGB constructor
+     *
      * @param int $red
      * @param int $green
      * @param int $blue
@@ -30,6 +31,7 @@ class RGB
 
     /**
      * Set RGB Colors
+     *
      * @param int $red
      * @param int $green
      * @param int $blue
@@ -46,6 +48,7 @@ class RGB
 
     /**
      * Get RGB Colors
+     *
      * @return array
      */
     public function getRGB()
@@ -59,6 +62,7 @@ class RGB
 
     /**
      * Set RGB Red Color
+     *
      * @param int $red
      * @return self
      * @throws ColorException
@@ -76,6 +80,7 @@ class RGB
 
     /**
      * Get RGB Red Color
+     *
      * @return int
      */
     public function getRed()
@@ -85,6 +90,7 @@ class RGB
 
     /**
      * Set RGB Green Color
+     *
      * @param int $green
      * @return self
      * @throws ColorException
@@ -102,6 +108,7 @@ class RGB
 
     /**
      * Get RGB Green Color
+     *
      * @return int
      */
     public function getGreen()
@@ -111,6 +118,7 @@ class RGB
 
     /**
      * Set RGB Blue Color
+     *
      * @param int $blue
      * @return self
      * @throws ColorException
@@ -128,6 +136,7 @@ class RGB
 
     /**
      * Get RGB Blue Color
+     *
      * @return int
      */
     public function getBlue()
@@ -136,8 +145,10 @@ class RGB
     }
 
     /**
+     * Converts CMYK color format to RGB color format
+     *
      * @param CMYK $cmyk
-     * @return $this
+     * @return self
      * @throws ColorException
      */
     public function fromCMYK(CMYK $cmyk)
@@ -159,8 +170,23 @@ class RGB
     }
 
     /**
+     * Converts from RGB color format to CMYK color format
+     *
+     * @return CMYK
+     */
+    public function toCMYK()
+    {
+        $cmyk = new CMYK();
+        $cmyk->fromRGB($this);
+
+        return $cmyk;
+    }
+
+    /**
+     * Converts from HTML color format to RGB color format
+     *
      * @param HTML $html
-     * @return $this
+     * @return self
      * @throws ColorException
      */
     public function fromHTML(HTML $html)
@@ -173,17 +199,8 @@ class RGB
     }
 
     /**
-     * @return CMYK
-     */
-    public function toCMYK()
-    {
-        $cmyk = new CMYK();
-        $cmyk->fromRGB($this);
-
-        return $cmyk;
-    }
-
-    /**
+     * Converts from RGB color format to HTML color format
+     *
      * @return HTML
      */
     public function toHTML()

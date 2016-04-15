@@ -22,10 +22,10 @@ class CMYK
     /**
      * CMYK constructor.
      *
-     * @param int $cyan
-     * @param int $magenta
-     * @param int $yellow
-     * @param int $key
+     * @param int|string $cyan
+     * @param int|string $magenta
+     * @param int|string $yellow
+     * @param int|string $key
      */
     public function __construct($cyan = 0, $magenta = 0, $yellow = 0, $key = 0)
     {
@@ -144,7 +144,7 @@ class CMYK
     }
 
     /**
-     * 
+     * Sets the Key percentage
      *
      * @param int|string $key
      * @throws ColorException
@@ -160,6 +160,8 @@ class CMYK
     }
 
     /**
+     * Gets the Key percentage
+     *
      * @return int
      */
     public function getKey()
@@ -168,8 +170,10 @@ class CMYK
     }
 
     /**
+     * Converts from HTML color format to CMYK color format
+     *
      * @param HTML $html
-     * @return $this
+     * @return self
      */
     public function fromHTML(HTML $html)
     {
@@ -179,6 +183,8 @@ class CMYK
     }
 
     /**
+     * Converts from CMYK color format to HTML color format
+     *
      * @return HTML
      */
     public function toHTML()
@@ -190,8 +196,10 @@ class CMYK
     }
 
     /**
+     * Converts from RGB color format to CMYK color format
+     *
      * @param RGB $rgb
-     * @return $this
+     * @return self
      */
     public function fromRGB(RGB $rgb)
     {
@@ -213,13 +221,15 @@ class CMYK
     }
 
     /**
-     * Converts CMYK to RGB
+     * Converts from CMYK color format to RGB color format
+     *
      * @return RGB
      */
     public function toRGB()
     {
         $rgb = new RGB();
         $rgb->fromCMYK($this);
+        
         return $rgb;
     }
 }

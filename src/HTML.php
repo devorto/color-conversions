@@ -22,7 +22,8 @@ class HTML
     ];
 
     /**
-     * HTML constructor.
+     * HTML constructor
+     *
      * @param string $htmlColorCode
      */
     public function __construct($htmlColorCode = '#000000')
@@ -31,7 +32,7 @@ class HTML
     }
 
     /**
-     * Set HTML color code
+     * Sets HTML color code
      *
      * @param string $htmlColorCode Code or HTML name
      * @throws ColorException
@@ -61,7 +62,7 @@ class HTML
     }
 
     /**
-     * Get HTML color code
+     * Gets HTML color code
      *
      * @param bool $includeHashtag
      * @return string
@@ -75,7 +76,7 @@ class HTML
      * Converts CMYK color format to HTML color format
      *
      * @param CMYK $cmyk
-     * @return $this
+     * @return self
      */
     public function fromCMYK(CMYK $cmyk)
     {
@@ -88,7 +89,7 @@ class HTML
      * Converts RGB color format to HTML color format
      *
      * @param RGB $rgb
-     * @return $this
+     * @return self
      * @throws ColorException
      */
     public function fromRGB(RGB $rgb)
