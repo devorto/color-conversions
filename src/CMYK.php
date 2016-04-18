@@ -242,4 +242,28 @@ class CMYK
 
         return $rgb;
     }
+
+    /**
+     * Converts HSV color format to CMYK color format
+     *
+     * @param HSV $hsv
+     * @return self
+     */
+    public function fromHSV(HSV $hsv)
+    {
+        return $this->fromRGB($hsv->toRGB());
+    }
+
+    /**
+     * Converts CMYK color format to HSV color format
+     *
+     * @return HSV
+     */
+    public function toHSV()
+    {
+        $hsv = new HSV();
+        $hsv->fromCMYK($this);
+        
+        return $hsv;
+    }
 }

@@ -119,7 +119,7 @@ class HTML
     }
 
     /**
-     * Converts RGB color format to CMYK color format
+     * Converts HTML color format to RGB color format
      *
      * @return RGB
      */
@@ -129,5 +129,29 @@ class HTML
         $rgb->fromHTML($this);
 
         return $rgb;
+    }
+
+    /**
+     * Converts HSV color format to HTML color format
+     *
+     * @param HSV $hsv
+     * @return HTML
+     */
+    public function fromHSV(HSV $hsv)
+    {
+        return $this->fromRGB($hsv->toRGB());
+    }
+
+    /**
+     * Converts HTML color format to HSV color format
+     *
+     * @return HSV
+     */
+    public function toHSV()
+    {
+        $hsv = new HSV();
+        $hsv->fromHTML($this);
+        
+        return $hsv;
     }
 }
