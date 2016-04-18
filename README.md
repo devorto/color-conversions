@@ -5,6 +5,7 @@ A PHP package to convert between different color formats
 * RGB
 * HTML
 * CMYK
+* HSV
 
 ##Composer
 This package can also be installed through composer by requiring `gdwebs\ColorFormats`.
