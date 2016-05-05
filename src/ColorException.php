@@ -1,6 +1,6 @@
 <?php
 
-namespace gdwebs\ColorFormats;
+namespace gdwebs\colorformats;
 
 use Exception;
 

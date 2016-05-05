@@ -2,7 +2,7 @@
 /**
  * @author Geoffrey Dijkstra
  */
-namespace gdwebs\ColorFormats;
+namespace gdwebs\colorformats;
 
 /**
  * Class HSV
