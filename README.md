@@ -10,11 +10,9 @@ A PHP package to convert between different color formats
 ##Installation
 This package can be installed through composer by requiring `gdwebs\ColorFormats`.
 
-##Issues
-Use the "Issues" tab :)
-
-##Pull request
-Pull request are always welcome. Note that the code should follow PSR standards.
+##Issues + Pull Requests
+For issues use the "Issues" tab or even better send a pull request to solve the issue ;)
+Note that the code should follow PSR2 standards.
 
 ##License
 MIT, see [License](LICENSE.md).
