@@ -6,38 +6,48 @@ namespace gdwebs\colorformats;
 
 /**
  * Class RGB
+ *
  * @package gdwebs\Colors
  */
-class RGB
+final class RGB
 {
-    /** @var int */
-    protected $red;
-    /** @var int */
-    protected $green;
-    /** @var int */
-    protected $blue;
+    /**
+     * @var int
+     */
+    private $red;
 
     /**
-     * RGB constructor
+     * @var int
+     */
+    private $green;
+
+    /**
+     * @var int
+     */
+    private $blue;
+
+    /**
+     * RGB constructor.
      *
      * @param int $red
      * @param int $green
      * @param int $blue
      */
-    public function __construct($red = 0, $green = 0, $blue = 0)
+    public function __construct(int $red = 0, int $green = 0, int $blue = 0)
     {
         $this->setRGB($red, $green, $blue);
     }
 
     /**
-     * Set RGB Colors
+     * Set RGB Colors.
      *
      * @param int $red
      * @param int $green
      * @param int $blue
-     * @return self
+     *
+     * @return RGB
      */
-    public function setRGB($red = 0, $green = 0, $blue = 0)
+    public function setRGB(int $red = 0, int $green = 0, int $blue = 0): RGB
     {
         $this->setRed($red);
         $this->setGreen($green);
@@ -47,29 +57,29 @@ class RGB
     }
 
     /**
-     * Get RGB Colors
+     * Get RGB Colors.
      *
-     * @return array
+     * @return int[]
      */
     public function getRGB()
     {
         return [
-            'red' => $this->red,
+            'red'   => $this->red,
             'green' => $this->green,
-            'blue' => $this->blue
+            'blue'  => $this->blue
         ];
     }
 
     /**
-     * Set RGB Red Color
+     * Set RGB Red Color.
      *
      * @param int $red
-     * @return self
+     *
      * @throws ColorException
+     * @return RGB
      */
-    public function setRed($red)
+    public function setRed(int $red): RGB
     {
-        $red = (int)$red;
         if ($red < 0 || $red > 255) {
             throw new ColorException('red', $red, 0, 255);
         }
@@ -79,25 +89,25 @@ class RGB
     }
 
     /**
-     * Get RGB Red Color
+     * Get RGB Red Color.
      *
      * @return int
      */
-    public function getRed()
+    public function getRed(): int
     {
         return $this->red;
     }
 
     /**
-     * Set RGB Green Color
+     * Set RGB Green Color.
      *
      * @param int $green
-     * @return self
+     *
      * @throws ColorException
+     * @return RGB
      */
-    public function setGreen($green)
+    public function setGreen($green): RGB
     {
-        $green = (int)$green;
         if ($green < 0 || $green > 255) {
             throw new ColorException('green', $green, 0, 255);
         }
@@ -107,25 +117,25 @@ class RGB
     }
 
     /**
-     * Get RGB Green Color
+     * Get RGB Green Color.
      *
      * @return int
      */
-    public function getGreen()
+    public function getGreen(): int
     {
         return $this->green;
     }
 
     /**
-     * Set RGB Blue Color
+     * Set RGB Blue Color.
      *
      * @param int $blue
-     * @return self
+     *
      * @throws ColorException
+     * @return RGB
      */
-    public function setBlue($blue)
+    public function setBlue($blue): RGB
     {
-        $blue = (int)$blue;
         if ($blue < 0 || $blue > 255) {
             throw new ColorException('blue', $blue, 0, 255);
         }
@@ -135,23 +145,24 @@ class RGB
     }
 
     /**
-     * Get RGB Blue Color
+     * Get RGB Blue Color.
      *
      * @return int
      */
-    public function getBlue()
+    public function getBlue(): int
     {
         return $this->blue;
     }
 
     /**
-     * Converts CMYK color format to RGB color format
+     * Converts CMYK color format to RGB color format.
      *
      * @param CMYK $cmyk
-     * @return self
+     *
      * @throws ColorException
+     * @return RGB
      */
-    public function fromCMYK(CMYK $cmyk)
+    public function fromCMYK(CMYK $cmyk): RGB
     {
         $cyan = $cmyk->getCyan() / 100;
         $magenta = $cmyk->getMagenta() / 100;
@@ -170,11 +181,11 @@ class RGB
     }
 
     /**
-     * Converts from RGB color format to CMYK color format
+     * Converts from RGB color format to CMYK color format.
      *
      * @return CMYK
      */
-    public function toCMYK()
+    public function toCMYK(): CMYK
     {
         $cmyk = new CMYK();
         $cmyk->fromRGB($this);
@@ -183,27 +194,28 @@ class RGB
     }
 
     /**
-     * Converts from HTML color format to RGB color format
+     * Converts from HTML color format to RGB color format.
      *
      * @param HTML $html
-     * @return self
+     *
      * @throws ColorException
+     * @return RGB
      */
-    public function fromHTML(HTML $html)
+    public function fromHTML(HTML $html): RGB
     {
-        $this->setRed(hexdec(substr($html->getHTML(false), 0, 2)));
-        $this->setGreen(hexdec(substr($html->getHTML(false), 2, 2)));
-        $this->setBlue(hexdec(substr($html->getHTML(false), 4, 2)));
+        $this->setRed(hexdec(substr(trim($html->getHTML(), '#'), 0, 2)));
+        $this->setGreen(hexdec(substr(trim($html->getHTML(), '#'), 2, 2)));
+        $this->setBlue(hexdec(substr(trim($html->getHTML(), '#'), 4, 2)));
 
         return $this;
     }
 
     /**
-     * Converts from RGB color format to HTML color format
+     * Converts from RGB color format to HTML color format.
      *
      * @return HTML
      */
-    public function toHTML()
+    public function toHTML(): HTML
     {
         $html = new HTML();
         $html->fromRGB($this);

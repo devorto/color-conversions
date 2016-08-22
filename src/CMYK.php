@@ -6,42 +6,55 @@ namespace gdwebs\colorformats;
 
 /**
  * Class CMYK
+ *
  * @package gdwebs\Colors
  */
-class CMYK
+final class CMYK
 {
-    /** @var int */
-    protected $cyan;
-    /** @var int */
-    protected $magenta;
-    /** @var int */
-    protected $yellow;
-    /** @var int */
-    protected $key;
+    /**
+     * @var int
+     */
+    private $cyan;
+
+    /**
+     * @var int
+     */
+    private $magenta;
+
+    /**
+     * @var int
+     */
+    private $yellow;
+
+    /**
+     * @var int
+     */
+    private $key;
 
     /**
      * CMYK constructor.
      *
-     * @param int|string $cyan
-     * @param int|string $magenta
-     * @param int|string $yellow
-     * @param int|string $key
+     * @param int $cyan
+     * @param int $magenta
+     * @param int $yellow
+     * @param int $key
      */
-    public function __construct($cyan = 0, $magenta = 0, $yellow = 0, $key = 0)
+    public function __construct(int $cyan = 0, int $magenta = 0, int $yellow = 0, int $key = 0)
     {
         $this->setCMYK($cyan, $magenta, $yellow, $key);
     }
 
     /**
-     * Set CMYK Color Code
+     * Set CMYK Color Code.
      *
-     * @param int|string $cyan %
-     * @param int|string $magenta %
-     * @param int|string $yellow %
-     * @param int|string $key % (Black)
-     * @return self
+     * @param int $cyan    %
+     * @param int $magenta %
+     * @param int $yellow  %
+     * @param int $key     % (Black)
+     *
+     * @return CMYK
      */
-    public function setCMYK($cyan, $magenta, $yellow, $key)
+    public function setCMYK(int $cyan = 0, int $magenta = 0, int $yellow = 0, int $key = 0): CMYK
     {
         $this->setCyan($cyan);
         $this->setMagenta($magenta);
@@ -52,31 +65,30 @@ class CMYK
     }
 
     /**
-     * Get CMYK Color Code
+     * Get CMYK Color Code.
      *
-     * @param bool $includePercentage
-     * @return array
+     * @return int[]
      */
-    public function getCMYK($includePercentage = true)
+    public function getCMYK(): array
     {
         return [
-            'cyan' => $this->cyan . ($includePercentage ? '%' : ''),
-            'magenta' => $this->magenta . ($includePercentage ? '%' : ''),
-            'yellow' => $this->yellow . ($includePercentage ? '%' : ''),
-            'key' => $this->key . ($includePercentage ? '%' : '')
+            'cyan'    => $this->cyan,
+            'magenta' => $this->magenta,
+            'yellow'  => $this->yellow,
+            'key'     => $this->key
         ];
     }
 
     /**
-     * Sets the Cyan color percentage
+     * Sets the Cyan color percentage.
      *
-     * @param int|string $cyan
+     * @param int $cyan
+     *
      * @throws ColorException
-     * @return self
+     * @return CMYK
      */
-    public function setCyan($cyan)
+    public function setCyan(int $cyan): CMYK
     {
-        $cyan = (int)$cyan;
         if ($cyan < 0 || $cyan > 100) {
             throw new ColorException('cyan', $cyan, 0, 100);
         }
@@ -86,25 +98,25 @@ class CMYK
     }
 
     /**
-     * Get the Cyan color percentage
+     * Get the Cyan color percentage.
      *
      * @return int
      */
-    public function getCyan()
+    public function getCyan(): int
     {
         return $this->cyan;
     }
 
     /**
-     * Sets the Magenta color percentage
+     * Sets the Magenta color percentage.
      *
-     * @param int|string $magenta
+     * @param int $magenta
+     *
      * @throws ColorException
-     * @return self
+     * @return CMYK
      */
-    public function setMagenta($magenta)
+    public function setMagenta(int $magenta): CMYK
     {
-        $magenta = (int)$magenta;
         if ($magenta < 0 || $magenta > 100) {
             throw new ColorException('magenta', $magenta, 0, 100);
         }
@@ -114,25 +126,25 @@ class CMYK
     }
 
     /**
-     * Gets the Magenta color percentage
+     * Gets the Magenta color percentage.
      *
      * @return int
      */
-    public function getMagenta()
+    public function getMagenta(): int
     {
         return $this->magenta;
     }
 
     /**
-     * Sets the Yellow color percentage
+     * Sets the Yellow color percentage.
      *
-     * @param $yellow
+     * @param int $yellow
+     *
      * @throws ColorException
-     * @return self
+     * @return CMYK
      */
-    public function setYellow($yellow)
+    public function setYellow(int $yellow): CMYK
     {
-        $yellow = (int)$yellow;
         if ($yellow < 0 || $yellow > 100) {
             throw new ColorException('yellow', $yellow, 0, 100);
         }
@@ -142,25 +154,25 @@ class CMYK
     }
 
     /**
-     * Gets the Yellow color percentage
+     * Gets the Yellow color percentage.
      *
      * @return int
      */
-    public function getYellow()
+    public function getYellow(): int
     {
         return $this->yellow;
     }
 
     /**
-     * Sets the Key percentage
+     * Sets the Key percentage.
      *
-     * @param int|string $key
+     * @param int $key
+     *
      * @throws ColorException
-     * @return self
+     * @return CMYK
      */
-    public function setKey($key)
+    public function setKey(int $key): CMYK
     {
-        $key = (int)$key;
         if ($key < 0 || $key > 100) {
             throw new ColorException('key', $key, 0, 100);
         }
@@ -170,22 +182,23 @@ class CMYK
     }
 
     /**
-     * Gets the Key percentage
+     * Gets the Key percentage.
      *
      * @return int
      */
-    public function getKey()
+    public function getKey(): int
     {
         return $this->key;
     }
 
     /**
-     * Converts from HTML color format to CMYK color format
+     * Converts from HTML color format to CMYK color format.
      *
      * @param HTML $html
-     * @return self
+     *
+     * @return CMYK
      */
-    public function fromHTML(HTML $html)
+    public function fromHTML(HTML $html): CMYK
     {
         $this->fromRGB($html->toRGB());
 
@@ -193,11 +206,11 @@ class CMYK
     }
 
     /**
-     * Converts from CMYK color format to HTML color format
+     * Converts from CMYK color format to HTML color format.
      *
      * @return HTML
      */
-    public function toHTML()
+    public function toHTML(): HTML
     {
         $html = new HTML();
         $html->fromCMYK($this);
@@ -206,12 +219,13 @@ class CMYK
     }
 
     /**
-     * Converts from RGB color format to CMYK color format
+     * Converts from RGB color format to CMYK color format.
      *
      * @param RGB $rgb
-     * @return self
+     *
+     * @return CMYK
      */
-    public function fromRGB(RGB $rgb)
+    public function fromRGB(RGB $rgb): CMYK
     {
         $red = $rgb->getRed() / 255;
         $green = $rgb->getGreen() / 255;
@@ -231,11 +245,11 @@ class CMYK
     }
 
     /**
-     * Converts from CMYK color format to RGB color format
+     * Converts from CMYK color format to RGB color format.
      *
      * @return RGB
      */
-    public function toRGB()
+    public function toRGB(): RGB
     {
         $rgb = new RGB();
         $rgb->fromCMYK($this);
@@ -244,26 +258,27 @@ class CMYK
     }
 
     /**
-     * Converts HSV color format to CMYK color format
+     * Converts HSV color format to CMYK color format.
      *
      * @param HSV $hsv
-     * @return self
+     *
+     * @return CMYK
      */
-    public function fromHSV(HSV $hsv)
+    public function fromHSV(HSV $hsv): CMYK
     {
         return $this->fromRGB($hsv->toRGB());
     }
 
     /**
-     * Converts CMYK color format to HSV color format
+     * Converts CMYK color format to HSV color format.
      *
      * @return HSV
      */
-    public function toHSV()
+    public function toHSV(): HSV
     {
         $hsv = new HSV();
         $hsv->fromCMYK($this);
-        
+
         return $hsv;
     }
 }

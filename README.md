@@ -7,8 +7,8 @@ A PHP package to convert between different color formats
 * CMYK
 * HSV
 
-##Composer
-This package can also be installed through composer by requiring `gdwebs\ColorFormats`.
+##Installation
+This package can be installed through composer by requiring `gdwebs\ColorFormats`.
 
 ##Issues
 Use the "Issues" tab :)
@@ -17,4 +17,4 @@ Use the "Issues" tab :)
 Pull request are always welcome. Note that the code should follow PSR standards.
 
 ##License
-MIT, see LICENSE.md
+MIT, see [License](LICENSE.md).

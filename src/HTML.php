@@ -6,18 +6,24 @@ namespace gdwebs\colorformats;
 
 /**
  * Class HTML
+ *
  * @package gdwebs\Colors
  */
-class HTML
+final class HTML
 {
-    /** @var string HTML hex code without "#" */
-    protected $htmlColorCode;
-    /** @var array */
-    protected static $named = [
+    /**
+     * @var string HTML hex code without "#"
+     */
+    private $htmlColorCode;
+
+    /**
+     * @var string[]
+     */
+    private static $named = [
         'white' => 'ffffff',
         'black' => '000000',
-        'red' => 'ff0000',
-        'blue' => '0000ff',
+        'red'   => 'ff0000',
+        'blue'  => '0000ff',
         'green' => '00ff00'
     ];
 
@@ -26,19 +32,20 @@ class HTML
      *
      * @param string $htmlColorCode
      */
-    public function __construct($htmlColorCode = '#000000')
+    public function __construct(string $htmlColorCode = '#000000')
     {
         $this->setHTML($htmlColorCode);
     }
 
     /**
-     * Sets HTML color code
+     * Sets HTML color code.
      *
      * @param string $htmlColorCode Code or HTML name
+     *
      * @throws ColorException
-     * @return self
+     * @return HTML
      */
-    public function setHTML($htmlColorCode)
+    public function setHTML(string $htmlColorCode = '#000000'): HTML
     {
         $htmlColorCode = strtolower(trim($htmlColorCode));
         if (substr($htmlColorCode, 0, 1) != '#' && array_key_exists($htmlColorCode, self::$named)) {
@@ -64,23 +71,23 @@ class HTML
     }
 
     /**
-     * Gets HTML color code
+     * Gets HTML color code.
      *
-     * @param bool $includeHashtag
      * @return string
      */
-    public function getHTML($includeHashtag = true)
+    public function getHTML(): string
     {
-        return ($includeHashtag ? '#' : '') . $this->htmlColorCode;
+        return '#' . $this->htmlColorCode;
     }
 
     /**
-     * Converts CMYK color format to HTML color format
+     * Converts CMYK color format to HTML color format.
      *
      * @param CMYK $cmyk
-     * @return self
+     *
+     * @return HTML
      */
-    public function fromCMYK(CMYK $cmyk)
+    public function fromCMYK(CMYK $cmyk): HTML
     {
         $this->fromRGB($cmyk->toRGB());
 
@@ -88,11 +95,11 @@ class HTML
     }
 
     /**
-     * Converts HTML color format to CMYK color format
+     * Converts HTML color format to CMYK color format.
      *
      * @return CMYK
      */
-    public function toCMYK()
+    public function toCMYK(): CMYK
     {
         $cmyk = new CMYK();
         $cmyk->fromHTML($this);
@@ -101,13 +108,14 @@ class HTML
     }
 
     /**
-     * Converts RGB color format to HTML color format
+     * Converts RGB color format to HTML color format.
      *
      * @param RGB $rgb
-     * @return self
+     *
      * @throws ColorException
+     * @return HTML
      */
-    public function fromRGB(RGB $rgb)
+    public function fromRGB(RGB $rgb): HTML
     {
         $red = str_pad(dechex($rgb->getRed()), 2, '0', STR_PAD_LEFT);
         $green = str_pad(dechex($rgb->getGreen()), 2, '0', STR_PAD_LEFT);
@@ -119,11 +127,11 @@ class HTML
     }
 
     /**
-     * Converts HTML color format to RGB color format
+     * Converts HTML color format to RGB color format.
      *
      * @return RGB
      */
-    public function toRGB()
+    public function toRGB(): RGB
     {
         $rgb = new RGB();
         $rgb->fromHTML($this);
@@ -132,26 +140,27 @@ class HTML
     }
 
     /**
-     * Converts HSV color format to HTML color format
+     * Converts HSV color format to HTML color format.
      *
      * @param HSV $hsv
+     *
      * @return HTML
      */
-    public function fromHSV(HSV $hsv)
+    public function fromHSV(HSV $hsv): HTML
     {
         return $this->fromRGB($hsv->toRGB());
     }
 
     /**
-     * Converts HTML color format to HSV color format
+     * Converts HTML color format to HSV color format.
      *
      * @return HSV
      */
-    public function toHSV()
+    public function toHSV(): HSV
     {
         $hsv = new HSV();
         $hsv->fromHTML($this);
-        
+
         return $hsv;
     }
 }

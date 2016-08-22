@@ -6,38 +6,48 @@ namespace gdwebs\colorformats;
 
 /**
  * Class HSV
+ *
  * @package gdwebs\Colors
  */
-class HSV
+final class HSV
 {
-    /** @var int */
-    protected $hue;
-    /** @var int */
-    protected $saturation;
-    /** @var int */
-    protected $value;
+    /**
+     * @var int
+     */
+    private $hue;
 
     /**
-     * HSV constructor
+     * @var int
+     */
+    private $saturation;
+
+    /**
+     * @var int
+     */
+    private $value;
+
+    /**
+     * HSV constructor.
      *
      * @param int $hue
-     * @param int|string $saturation
-     * @param int|string $value
+     * @param int $saturation
+     * @param int $value
      */
-    public function __construct($hue = 0, $saturation = 0, $value = 0)
+    public function __construct(int $hue = 0, int $saturation = 0, int $value = 0)
     {
         $this->setHSV($hue, $saturation, $value);
     }
 
     /**
-     * Sets HSV color code
+     * Sets HSV color code.
      *
-     * @param int $hue 360°
-     * @param string|int $saturation %
-     * @param string|int $value %
-     * @return self
+     * @param int $hue        360°
+     * @param int $saturation %
+     * @param int $value      %
+     *
+     * @return HSV
      */
-    public function setHSV($hue, $saturation, $value)
+    public function setHSV(int $hue = 0, int $saturation = 0, int $value = 0): HSV
     {
         $this->setHue($hue);
         $this->setSaturation($saturation);
@@ -47,30 +57,29 @@ class HSV
     }
 
     /**
-     * Gets HSV colors
+     * Gets HSV colors.
      *
-     * @param bool $includePercentage
-     * @return array
+     * @return int[]
      */
-    public function getHSV($includePercentage = true)
+    public function getHSV()
     {
         return [
-            'hue' => $this->hue . ($includePercentage ? '%' : ''),
-            'saturation' => $this->saturation . ($includePercentage ? '%' : ''),
-            'value' => $this->value . ($includePercentage ? '%' : '')
+            'hue'        => $this->hue,
+            'saturation' => $this->saturation,
+            'value'      => $this->value
         ];
     }
 
     /**
-     * Sets the hue color degrees
+     * Sets the hue color degrees.
      *
      * @param int $hue
-     * @return self
+     *
      * @throws ColorException
+     * @return HSV
      */
-    public function setHue($hue)
+    public function setHue(int $hue): HSV
     {
-        $hue = (int)$hue;
         if ($hue < 0 || $hue > 360) {
             throw new ColorException('hue', $hue, 0, 360);
         }
@@ -80,25 +89,25 @@ class HSV
     }
 
     /**
-     * Gets the hue color degrees
+     * Gets the hue color degrees.
      *
      * @return int
      */
-    public function getHue()
+    public function getHue(): int
     {
         return $this->hue;
     }
 
     /**
-     * Sets the saturation percentage
+     * Sets the saturation percentage.
      *
-     * @param $saturation
-     * @return self
+     * @param int $saturation
+     *
      * @throws ColorException
+     * @return HSV
      */
-    public function setSaturation($saturation)
+    public function setSaturation(int $saturation): HSV
     {
-        $saturation = (int)$saturation;
         if ($saturation < 0 || $saturation > 100) {
             throw new ColorException('saturation', $saturation, 0, 100);
         }
@@ -108,25 +117,25 @@ class HSV
     }
 
     /**
-     * Gets the saturation percentage
+     * Gets the saturation percentage.
      *
      * @return int
      */
-    public function getSaturation()
+    public function getSaturation(): int
     {
         return $this->saturation;
     }
 
     /**
-     * Sets the value percentage
+     * Sets the value percentage.
      *
-     * @param $value
-     * @return self
+     * @param int $value
+     *
      * @throws ColorException
+     * @return HSV
      */
-    public function setValue($value)
+    public function setValue(int $value): HSV
     {
-        $value = (int)$value;
         if ($value < 0 || $value > 100) {
             throw new ColorException('value', $value, 0, 100);
         }
@@ -136,71 +145,74 @@ class HSV
     }
 
     /**
-     * Gets the value percentage
+     * Gets the value percentage.
      *
      * @return int
      */
-    public function getValue()
+    public function getValue(): int
     {
         return $this->value;
     }
 
     /**
-     * Converts CMYK color format to HSV color format
+     * Converts CMYK color format to HSV color format.
      *
      * @param CMYK $cmyk
+     *
      * @return HSV
      */
-    public function fromCMYK(CMYK $cmyk)
+    public function fromCMYK(CMYK $cmyk): HSV
     {
         return $this->fromRGB($cmyk->toRGB());
     }
 
     /**
-     * Converts HSV color format to CMYK color format
+     * Converts HSV color format to CMYK color format.
      *
      * @return CMYK
      */
-    public function toCMYK()
+    public function toCMYK(): CMYK
     {
         $cmyk = new CMYK();
         $cmyk->fromHSV($this);
-        
+
         return $cmyk;
     }
 
     /**
-     * Converts HTML color format to HSV color format
+     * Converts HTML color format to HSV color format.
      *
      * @param HTML $html
+     *
      * @return HSV
      */
-    public function fromHTML(HTML $html)
+    public function fromHTML(HTML $html): HSV
     {
         return $this->fromRGB($html->toRGB());
     }
 
     /**
-     * Converts HSV color format to HTML color format
+     * Converts HSV color format to HTML color format.
      *
      * @return HTML
      */
-    public function toHTML()
+    public function toHTML(): HTML
     {
         $html = new HTML();
         $html->fromHSV($this);
-        
+
         return $html;
     }
 
     /**
-     * Converts RGB color format to HSV color format
+     * Converts RGB color format to HSV color format.
      *
      * @param RGB $rgb
-     * @return $this
+     *
      * @throws ColorException
+     * @return HSV
      */
-    public function fromRGB(RGB $rgb)
+    public function fromRGB(RGB $rgb): HSV
     {
         $red = $rgb->getRed() / 255;
         $green = $rgb->getGreen() / 255;
@@ -244,11 +256,11 @@ class HSV
     }
 
     /**
-     * Converts HSV color format to RGB color format
+     * Converts HSV color format to RGB color format.
      *
      * @return RGB
      */
-    public function toRGB()
+    public function toRGB(): RGB
     {
         $hue = $this->hue / 360;
         $saturation = $this->saturation / 100;
