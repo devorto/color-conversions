@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/packagist/l/gdwebs/color-formats.svg?maxAge=86400)](LICENSE.md)
-[![Version](https://img.shields.io/github/release/GeoffreyDijkstra/Color-Formats.svg?maxAge=86400)](/GeoffreyDijkstra/Color-Formats/releases)
+[![Version](https://img.shields.io/github/release/GeoffreyDijkstra/Color-Formats.svg?maxAge=86400)](https://github.com/GeoffreyDijkstra/Color-Formats/releases)
 [![Downloads](https://img.shields.io/packagist/dd/gdwebs/color-formats.svg?maxAge=86400)](https://packagist.org/packages/gdwebs/color-formats)
 
 #Color Formats
