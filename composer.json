@@ -15,5 +15,8 @@
     "psr-4": {
       "gdwebs\\colorformats\\": "src/"
     }
+  },
+  "require": {
+    "PHP": ">=7.0"
   }
 }
