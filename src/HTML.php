@@ -117,9 +117,9 @@ final class HTML
      */
     public function fromRGB(RGB $rgb): HTML
     {
-        $red = str_pad(dechex($rgb->getRed()), 2, '0', STR_PAD_LEFT);
+        $red   = str_pad(dechex($rgb->getRed()), 2, '0', STR_PAD_LEFT);
         $green = str_pad(dechex($rgb->getGreen()), 2, '0', STR_PAD_LEFT);
-        $blue = str_pad(dechex($rgb->getBlue()), 2, '0', STR_PAD_LEFT);
+        $blue  = str_pad(dechex($rgb->getBlue()), 2, '0', STR_PAD_LEFT);
 
         $this->setHTML(implode('', [$red, $green, $blue]));
 

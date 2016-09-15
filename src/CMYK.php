@@ -227,14 +227,14 @@ final class CMYK
      */
     public function fromRGB(RGB $rgb): CMYK
     {
-        $red = $rgb->getRed() / 255;
+        $red   = $rgb->getRed() / 255;
         $green = $rgb->getGreen() / 255;
-        $blue = $rgb->getBlue() / 255;
+        $blue  = $rgb->getBlue() / 255;
 
-        $key = min(1 - $red, 1 - $green, 1 - $blue);
-        $cyan = (1 - $red - $key) / (1 - $key);
+        $key     = min(1 - $red, 1 - $green, 1 - $blue);
+        $cyan    = (1 - $red - $key) / (1 - $key);
         $magenta = (1 - $green - $key) / (1 - $key);
-        $yellow = (1 - $blue - $key) / (1 - $key);
+        $yellow  = (1 - $blue - $key) / (1 - $key);
 
         $this->setCyan(round($cyan * 100));
         $this->setMagenta(round($magenta * 100));

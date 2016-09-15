@@ -6,16 +6,18 @@ use Exception;
 
 /**
  * Class ColorException
+ *
  * @package gdwebs\Colors
  */
 class ColorException extends \Exception
 {
     /**
      * ColorException constructor.
+     *
      * @param string $name
-     * @param int $value
-     * @param int $rangeStart
-     * @param int $rangeEnd
+     * @param int    $value
+     * @param int    $rangeStart
+     * @param int    $rangeEnd
      */
     public function __construct($name, $value, $rangeStart, $rangeEnd)
     {

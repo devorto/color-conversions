@@ -1,12 +1,14 @@
 {
-  "name": "gdwebs/colorformats",
+  "name": "gdwebs/color-formats",
   "description": "A PHP package to convert between color spaces",
+  "license": "MIT",
+  "type": "library",
   "authors": [
     {
       "name": "Geoffrey Dijkstra",
       "email": "info@gdwebs.nl",
       "homepage": "http://www.gdwebs.nl",
-      "role": "Developer"
+      "role": "Lead"
     }
   ],
   "autoload": {
