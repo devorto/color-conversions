@@ -1,36 +1,34 @@
 <?php
-/**
- * @author Geoffrey Dijkstra
- */
-namespace gdwebs\colorformats;
+
+namespace Devorto\ColorConversions;
 
 /**
  * Class HTML
  *
- * @package gdwebs\Colors
+ * @package Devorto\ColorConversions
  */
-final class HTML
+class HTML
 {
     /**
      * @var string HTML hex code without "#"
      */
-    private $htmlColorCode;
+    protected string $htmlColorCode;
 
     /**
      * @var string[]
      */
-    private static $named = [
+    protected static array $named = [
         'white' => 'ffffff',
         'black' => '000000',
-        'red'   => 'ff0000',
-        'blue'  => '0000ff',
+        'red' => 'ff0000',
+        'blue' => '0000ff',
         'green' => '00ff00'
     ];
 
     /**
-     * HTML constructor
-     *
      * @param string $htmlColorCode
+     *
+     * @throws ColorException
      */
     public function __construct(string $htmlColorCode = '#000000')
     {
@@ -42,8 +40,8 @@ final class HTML
      *
      * @param string $htmlColorCode Code or HTML name
      *
-     * @throws ColorException
      * @return HTML
+     * @throws ColorException
      */
     public function setHTML(string $htmlColorCode = '#000000'): HTML
     {
@@ -54,7 +52,7 @@ final class HTML
             $htmlColorCode = trim($htmlColorCode, '#');
             // Assuming short syntax
             if (strlen($htmlColorCode) == 3) {
-                $pieces = str_split($htmlColorCode, 1);
+                $pieces = str_split($htmlColorCode);
                 array_walk($pieces, function ($char) {
                     return str_repeat($char, 2);
                 });
@@ -86,6 +84,7 @@ final class HTML
      * @param CMYK $cmyk
      *
      * @return HTML
+     * @throws ColorException
      */
     public function fromCMYK(CMYK $cmyk): HTML
     {
@@ -98,6 +97,7 @@ final class HTML
      * Converts HTML color format to CMYK color format.
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function toCMYK(): CMYK
     {
@@ -112,14 +112,14 @@ final class HTML
      *
      * @param RGB $rgb
      *
-     * @throws ColorException
      * @return HTML
+     * @throws ColorException
      */
     public function fromRGB(RGB $rgb): HTML
     {
-        $red   = str_pad(dechex($rgb->getRed()), 2, '0', STR_PAD_LEFT);
+        $red = str_pad(dechex($rgb->getRed()), 2, '0', STR_PAD_LEFT);
         $green = str_pad(dechex($rgb->getGreen()), 2, '0', STR_PAD_LEFT);
-        $blue  = str_pad(dechex($rgb->getBlue()), 2, '0', STR_PAD_LEFT);
+        $blue = str_pad(dechex($rgb->getBlue()), 2, '0', STR_PAD_LEFT);
 
         $this->setHTML(implode('', [$red, $green, $blue]));
 
@@ -130,6 +130,7 @@ final class HTML
      * Converts HTML color format to RGB color format.
      *
      * @return RGB
+     * @throws ColorException
      */
     public function toRGB(): RGB
     {
@@ -145,6 +146,7 @@ final class HTML
      * @param HSV $hsv
      *
      * @return HTML
+     * @throws ColorException
      */
     public function fromHSV(HSV $hsv): HTML
     {
@@ -155,6 +157,7 @@ final class HTML
      * Converts HTML color format to HSV color format.
      *
      * @return HSV
+     * @throws ColorException
      */
     public function toHSV(): HSV
     {

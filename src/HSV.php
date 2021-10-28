@@ -1,37 +1,35 @@
 <?php
-/**
- * @author Geoffrey Dijkstra
- */
-namespace gdwebs\colorformats;
+
+namespace Devorto\ColorConversions;
 
 /**
  * Class HSV
  *
- * @package gdwebs\Colors
+ * @package Devorto\ColorConversions
  */
-final class HSV
+class HSV
 {
     /**
      * @var int
      */
-    private $hue;
+    protected int $hue;
 
     /**
      * @var int
      */
-    private $saturation;
+    protected int $saturation;
 
     /**
      * @var int
      */
-    private $value;
+    protected int $value;
 
     /**
-     * HSV constructor.
-     *
      * @param int $hue
      * @param int $saturation
      * @param int $value
+     *
+     * @throws ColorException
      */
     public function __construct(int $hue = 0, int $saturation = 0, int $value = 0)
     {
@@ -41,11 +39,12 @@ final class HSV
     /**
      * Sets HSV color code.
      *
-     * @param int $hue        360°
+     * @param int $hue 360°
      * @param int $saturation %
-     * @param int $value      %
+     * @param int $value %
      *
      * @return HSV
+     * @throws ColorException
      */
     public function setHSV(int $hue = 0, int $saturation = 0, int $value = 0): HSV
     {
@@ -61,12 +60,12 @@ final class HSV
      *
      * @return int[]
      */
-    public function getHSV()
+    public function getHSV(): array
     {
         return [
-            'hue'        => $this->hue,
+            'hue' => $this->hue,
             'saturation' => $this->saturation,
-            'value'      => $this->value
+            'value' => $this->value
         ];
     }
 
@@ -75,8 +74,8 @@ final class HSV
      *
      * @param int $hue
      *
-     * @throws ColorException
      * @return HSV
+     * @throws ColorException
      */
     public function setHue(int $hue): HSV
     {
@@ -103,8 +102,8 @@ final class HSV
      *
      * @param int $saturation
      *
-     * @throws ColorException
      * @return HSV
+     * @throws ColorException
      */
     public function setSaturation(int $saturation): HSV
     {
@@ -131,8 +130,8 @@ final class HSV
      *
      * @param int $value
      *
-     * @throws ColorException
      * @return HSV
+     * @throws ColorException
      */
     public function setValue(int $value): HSV
     {
@@ -160,6 +159,7 @@ final class HSV
      * @param CMYK $cmyk
      *
      * @return HSV
+     * @throws ColorException
      */
     public function fromCMYK(CMYK $cmyk): HSV
     {
@@ -170,6 +170,7 @@ final class HSV
      * Converts HSV color format to CMYK color format.
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function toCMYK(): CMYK
     {
@@ -185,6 +186,7 @@ final class HSV
      * @param HTML $html
      *
      * @return HSV
+     * @throws ColorException
      */
     public function fromHTML(HTML $html): HSV
     {
@@ -209,28 +211,28 @@ final class HSV
      *
      * @param RGB $rgb
      *
-     * @throws ColorException
      * @return HSV
+     * @throws ColorException
      */
     public function fromRGB(RGB $rgb): HSV
     {
-        $red   = $rgb->getRed() / 255;
+        $red = $rgb->getRed() / 255;
         $green = $rgb->getGreen() / 255;
-        $blue  = $rgb->getBlue() / 255;
+        $blue = $rgb->getBlue() / 255;
 
         $minVal = min($red, $green, $blue);
         $maxVal = max($red, $green, $blue);
-        $delta  = $maxVal - $minVal;
+        $delta = $maxVal - $minVal;
 
-        $hue        = 0;
+        $hue = 0;
         $saturation = 0;
-        $value      = $maxVal;
+        $value = $maxVal;
 
         if ($delta != 0) {
             $saturation = $delta / $maxVal;
-            $delRed     = ((($maxVal - $red) / 6) + ($delta / 2)) / $delta;
-            $delGreen   = ((($maxVal - $green) / 6) + ($delta / 2)) / $delta;
-            $delBlue    = ((($maxVal - $blue) / 6) + ($delta / 2)) / $delta;
+            $delRed = ((($maxVal - $red) / 6) + ($delta / 2)) / $delta;
+            $delGreen = ((($maxVal - $green) / 6) + ($delta / 2)) / $delta;
+            $delBlue = ((($maxVal - $blue) / 6) + ($delta / 2)) / $delta;
 
             if ($red == $maxVal) {
                 $hue = $delBlue - $delGreen;
@@ -262,50 +264,50 @@ final class HSV
      */
     public function toRGB(): RGB
     {
-        $hue        = $this->hue / 360;
+        $hue = $this->hue / 360;
         $saturation = $this->saturation / 100;
-        $value      = $this->value / 100;
+        $value = $this->value / 100;
 
         if ($saturation == 0) {
-            $red   = $value * 255;
+            $red = $value * 255;
             $green = $value * 255;
-            $blue  = $value * 255;
+            $blue = $value * 255;
         } else {
-            $hue  = $hue * 6;
+            $hue = $hue * 6;
             $var1 = floor($hue);
             $var2 = $value * (1 - $saturation);
             $var3 = $value * (1 - $saturation * ($hue - $var1));
             $var4 = $value * (1 - $saturation * (1 - ($hue - $var1)));
 
             if ($var1 == 0) {
-                $red   = $value;
+                $red = $value;
                 $green = $var4;
-                $blue  = $var2;
+                $blue = $var2;
             } elseif ($var1 == 1) {
-                $red   = $var3;
+                $red = $var3;
                 $green = $value;
-                $blue  = $var2;
+                $blue = $var2;
             } elseif ($var1 == 2) {
-                $red   = $var2;
+                $red = $var2;
                 $green = $value;
-                $blue  = $var4;
+                $blue = $var4;
             } elseif ($var1 == 3) {
-                $red   = $var2;
+                $red = $var2;
                 $green = $var3;
-                $blue  = $value;
+                $blue = $value;
             } elseif ($var1 == 4) {
-                $red   = $var4;
+                $red = $var4;
                 $green = $var2;
-                $blue  = $value;
+                $blue = $value;
             } else {
-                $red   = $value;
+                $red = $value;
                 $green = $var2;
-                $blue  = $var3;
-            };
+                $blue = $var3;
+            }
 
-            $red   = round($red * 255);
+            $red = round($red * 255);
             $green = round($green * 255);
-            $blue  = round($blue * 255);
+            $blue = round($blue * 255);
         }
 
         return new RGB($red, $green, $blue);

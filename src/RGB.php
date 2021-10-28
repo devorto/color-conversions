@@ -1,37 +1,35 @@
 <?php
-/**
- * @author Geoffrey Dijkstra
- */
-namespace gdwebs\colorformats;
+
+namespace Devorto\ColorConversions;
 
 /**
  * Class RGB
  *
- * @package gdwebs\Colors
+ * @package Devorto\ColorConversions
  */
-final class RGB
+class RGB
 {
     /**
      * @var int
      */
-    private $red;
+    protected int $red;
 
     /**
      * @var int
      */
-    private $green;
+    protected int $green;
 
     /**
      * @var int
      */
-    private $blue;
+    protected int $blue;
 
     /**
-     * RGB constructor.
-     *
      * @param int $red
      * @param int $green
      * @param int $blue
+     *
+     * @throws ColorException
      */
     public function __construct(int $red = 0, int $green = 0, int $blue = 0)
     {
@@ -46,6 +44,7 @@ final class RGB
      * @param int $blue
      *
      * @return RGB
+     * @throws ColorException
      */
     public function setRGB(int $red = 0, int $green = 0, int $blue = 0): RGB
     {
@@ -61,12 +60,12 @@ final class RGB
      *
      * @return int[]
      */
-    public function getRGB()
+    public function getRGB(): array
     {
         return [
-            'red'   => $this->red,
+            'red' => $this->red,
             'green' => $this->green,
-            'blue'  => $this->blue
+            'blue' => $this->blue
         ];
     }
 
@@ -75,8 +74,8 @@ final class RGB
      *
      * @param int $red
      *
-     * @throws ColorException
      * @return RGB
+     * @throws ColorException
      */
     public function setRed(int $red): RGB
     {
@@ -103,10 +102,10 @@ final class RGB
      *
      * @param int $green
      *
-     * @throws ColorException
      * @return RGB
+     * @throws ColorException
      */
-    public function setGreen($green): RGB
+    public function setGreen(int $green): RGB
     {
         if ($green < 0 || $green > 255) {
             throw new ColorException('green', $green, 0, 255);
@@ -131,10 +130,10 @@ final class RGB
      *
      * @param int $blue
      *
-     * @throws ColorException
      * @return RGB
+     * @throws ColorException
      */
-    public function setBlue($blue): RGB
+    public function setBlue(int $blue): RGB
     {
         if ($blue < 0 || $blue > 255) {
             throw new ColorException('blue', $blue, 0, 255);
@@ -159,19 +158,19 @@ final class RGB
      *
      * @param CMYK $cmyk
      *
-     * @throws ColorException
      * @return RGB
+     * @throws ColorException
      */
     public function fromCMYK(CMYK $cmyk): RGB
     {
-        $cyan    = $cmyk->getCyan() / 100;
+        $cyan = $cmyk->getCyan() / 100;
         $magenta = $cmyk->getMagenta() / 100;
-        $yellow  = $cmyk->getYellow() / 100;
-        $key     = $cmyk->getKey() / 100;
+        $yellow = $cmyk->getYellow() / 100;
+        $key = $cmyk->getKey() / 100;
 
-        $red   = 1 - min(1, ($cyan * (1 - $key)) + $key);
+        $red = 1 - min(1, ($cyan * (1 - $key)) + $key);
         $green = 1 - min(1, ($magenta * (1 - $key)) + $key);
-        $blue  = 1 - min(1, ($yellow * (1 - $key)) + $key);
+        $blue = 1 - min(1, ($yellow * (1 - $key)) + $key);
 
         $this->setRed(round($red * 255));
         $this->setGreen(round($green * 255));
@@ -184,6 +183,7 @@ final class RGB
      * Converts from RGB color format to CMYK color format.
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function toCMYK(): CMYK
     {
@@ -198,8 +198,8 @@ final class RGB
      *
      * @param HTML $html
      *
-     * @throws ColorException
      * @return RGB
+     * @throws ColorException
      */
     public function fromHTML(HTML $html): RGB
     {
@@ -214,6 +214,7 @@ final class RGB
      * Converts from RGB color format to HTML color format.
      *
      * @return HTML
+     * @throws ColorException
      */
     public function toHTML(): HTML
     {

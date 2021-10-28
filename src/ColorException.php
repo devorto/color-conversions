@@ -1,25 +1,23 @@
 <?php
 
-namespace gdwebs\colorformats;
+namespace Devorto\ColorConversions;
 
 use Exception;
 
 /**
  * Class ColorException
  *
- * @package gdwebs\Colors
+ * @package Devorto\ColorConversions
  */
-class ColorException extends \Exception
+class ColorException extends Exception
 {
     /**
-     * ColorException constructor.
-     *
      * @param string $name
-     * @param int    $value
-     * @param int    $rangeStart
-     * @param int    $rangeEnd
+     * @param int $value
+     * @param int $rangeStart
+     * @param int $rangeEnd
      */
-    public function __construct($name, $value, $rangeStart, $rangeEnd)
+    public function __construct(string $name, int $value, int $rangeStart, int $rangeEnd)
     {
         parent::__construct(
             sprintf(

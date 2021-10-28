@@ -1,43 +1,41 @@
 <?php
-/**
- * @author Geoffrey Dijkstra
- */
-namespace gdwebs\colorformats;
+
+namespace Devorto\ColorConversions;
 
 /**
  * Class CMYK
  *
- * @package gdwebs\Colors
+ * @package Devorto\ColorConversions
  */
-final class CMYK
+class CMYK
 {
     /**
      * @var int
      */
-    private $cyan;
+    protected int $cyan;
 
     /**
      * @var int
      */
-    private $magenta;
+    protected int $magenta;
 
     /**
      * @var int
      */
-    private $yellow;
+    protected int $yellow;
 
     /**
      * @var int
      */
-    private $key;
+    protected int $key;
 
     /**
-     * CMYK constructor.
-     *
      * @param int $cyan
      * @param int $magenta
      * @param int $yellow
      * @param int $key
+     *
+     * @throws ColorException
      */
     public function __construct(int $cyan = 0, int $magenta = 0, int $yellow = 0, int $key = 0)
     {
@@ -47,12 +45,13 @@ final class CMYK
     /**
      * Set CMYK Color Code.
      *
-     * @param int $cyan    %
+     * @param int $cyan %
      * @param int $magenta %
-     * @param int $yellow  %
-     * @param int $key     % (Black)
+     * @param int $yellow %
+     * @param int $key % (Black)
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function setCMYK(int $cyan = 0, int $magenta = 0, int $yellow = 0, int $key = 0): CMYK
     {
@@ -72,10 +71,10 @@ final class CMYK
     public function getCMYK(): array
     {
         return [
-            'cyan'    => $this->cyan,
+            'cyan' => $this->cyan,
             'magenta' => $this->magenta,
-            'yellow'  => $this->yellow,
-            'key'     => $this->key
+            'yellow' => $this->yellow,
+            'key' => $this->key
         ];
     }
 
@@ -84,8 +83,8 @@ final class CMYK
      *
      * @param int $cyan
      *
-     * @throws ColorException
      * @return CMYK
+     * @throws ColorException
      */
     public function setCyan(int $cyan): CMYK
     {
@@ -112,8 +111,8 @@ final class CMYK
      *
      * @param int $magenta
      *
-     * @throws ColorException
      * @return CMYK
+     * @throws ColorException
      */
     public function setMagenta(int $magenta): CMYK
     {
@@ -140,8 +139,8 @@ final class CMYK
      *
      * @param int $yellow
      *
-     * @throws ColorException
      * @return CMYK
+     * @throws ColorException
      */
     public function setYellow(int $yellow): CMYK
     {
@@ -168,8 +167,8 @@ final class CMYK
      *
      * @param int $key
      *
-     * @throws ColorException
      * @return CMYK
+     * @throws ColorException
      */
     public function setKey(int $key): CMYK
     {
@@ -197,6 +196,7 @@ final class CMYK
      * @param HTML $html
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function fromHTML(HTML $html): CMYK
     {
@@ -224,17 +224,18 @@ final class CMYK
      * @param RGB $rgb
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function fromRGB(RGB $rgb): CMYK
     {
-        $red   = $rgb->getRed() / 255;
+        $red = $rgb->getRed() / 255;
         $green = $rgb->getGreen() / 255;
-        $blue  = $rgb->getBlue() / 255;
+        $blue = $rgb->getBlue() / 255;
 
-        $key     = min(1 - $red, 1 - $green, 1 - $blue);
-        $cyan    = (1 - $red - $key) / (1 - $key);
+        $key = min(1 - $red, 1 - $green, 1 - $blue);
+        $cyan = (1 - $red - $key) / (1 - $key);
         $magenta = (1 - $green - $key) / (1 - $key);
-        $yellow  = (1 - $blue - $key) / (1 - $key);
+        $yellow = (1 - $blue - $key) / (1 - $key);
 
         $this->setCyan(round($cyan * 100));
         $this->setMagenta(round($magenta * 100));
@@ -248,6 +249,7 @@ final class CMYK
      * Converts from CMYK color format to RGB color format.
      *
      * @return RGB
+     * @throws ColorException
      */
     public function toRGB(): RGB
     {
@@ -263,6 +265,7 @@ final class CMYK
      * @param HSV $hsv
      *
      * @return CMYK
+     * @throws ColorException
      */
     public function fromHSV(HSV $hsv): CMYK
     {

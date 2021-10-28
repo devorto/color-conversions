@@ -1,22 +1,22 @@
 {
-  "name": "gdwebs/color-formats",
-  "description": "A PHP package to convert between color spaces",
-  "license": "MIT",
-  "type": "library",
-  "authors": [
-    {
-      "name": "Geoffrey Dijkstra",
-      "email": "info@gdwebs.nl",
-      "homepage": "http://www.gdwebs.nl",
-      "role": "Lead"
+    "name": "devorto/color-conversions",
+    "description": "A PHP package to convert between color formats.",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Devorto",
+            "email": "info@devorto.com",
+            "homepage": "https://www.devorto.com",
+            "role": "Owner"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Devorto\\ColorConversions\\": "src/"
+        }
+    },
+    "require": {
+        "PHP": "^7.4"
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "gdwebs\\colorformats\\": "src/"
-    }
-  },
-  "require": {
-    "PHP": ">=7.0"
-  }
 }
